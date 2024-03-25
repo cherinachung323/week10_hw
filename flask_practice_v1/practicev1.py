@@ -13,13 +13,40 @@ from flask import Flask
 app = Flask(__name__)
 
 
-# Homepage route
+# Group Home Page
+@app.route('/')
+def index():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Group Home Page </title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Welcome to our Homepage!</h1>
+        <a href='/rana'>
+        <img src="/static/Rana.png" alt="Rana" width="300" height="200">
+        </a>
+        <a>
+        <img src="/static/Katy.png" alt="Katy" width="300" height="200">
+        </a>
+        <a href='/cherina'>
+        <img src="/static/cherina.png" alt="Cherina" width="300" height="200">
+        </a>
+    </body>
+    </html>
+    """
+
+
 # use <a> tags
 # This route (@app.route('/')) defines the behavior of the homepage.
 # It returns an HTML response containing a welcome message, information about me, and links to the "About Me" page
 # (/about) and the "Projects" page (/projects).
-@app.route('/')
-def index():
+@app.route('/cherina')
+def cherina():
     return """
     <!DOCTYPE html>
     <html lang="en">
@@ -32,16 +59,17 @@ def index():
     <body>
         <h1>Welcome to My Homepage!</h1>
         <p>Hello, I'm Cherina. I'm now learning to code!</p>
-        <p>Check out my <a href="/about">About Me</a> page.</p>
-        <p>Explore my <a href="/projects">Projects</a>.</p>
+        <p>Check out my <a href="/about-cherina">About Me</a> page.</p>
+        <p>Explore my <a href="/projects-cherina">Projects</a>.</p>
+        <p>Back to Group Homepage <a href="/">Group Homepage</a>.</p>
     </body>
     </html>
     """
 
 
 # About Me route
-@app.route('/about')
-def about():
+@app.route('/about-cherina')
+def about_cherina():
     return """
     <!DOCTYPE html>
     <html lang="en">
@@ -54,16 +82,16 @@ def about():
     <body>
         <h1>About me</h1>
         <p>I'm Cherina. I love coding and playing volleyball.</p>
-        <p>Visit my <a href="/">Homepage</a>.</p>
-        <p>Explore my <a href="/projects">Projects</a>.</p>
+        <p>Visit my <a href="/cherina">Homepage</a>.</p>
+        <p>Explore my <a href="/projects-cherina">Projects</a>.</p>
     </body>
     </html>
     """
 
 
 # Projects route
-@app.route('/projects')
-def projects():
+@app.route('/projects-cherina')
+def projects_cherina():
     return """
     <!DOCTYPE html>
     <html lang="en">
@@ -81,17 +109,17 @@ def projects():
             <li>Project 2</li>
             <li>Project 3</li>
          </ul>
-         <p>Visit my <a href="/">Homepage</a></p>
-         <p>Learn more about me on <a href="/about">About Me</a></p>
-         <p>Contact me <a href="/contact">here</a></p>
+         <p>Visit my <a href="/cherina">Homepage</a></p>
+         <p>Learn more about me on <a href="/about-cherina">About Me</a></p>
+         <p>Contact me <a href="/contact-cherina">here</a></p>
     </body>
     </html>
     """
 
 
 # Contact route
-@app.route('/contact')
-def contact():
+@app.route('/contact-cherina')
+def contact_cherina():
     return """
     <!DOCTYPE html>
     <html lang="en">
@@ -104,8 +132,8 @@ def contact():
     <body>
         <h1>Contact Me</h1>
         <p>You can reach me via email: cherina.chung@gmail.com</p>
-        <p>Visit my <a href="/">Homepage</a></p>
-        <p>Learn more about me on <a href="/about">About Me</a></p>
+        <p>Visit my <a href="/cherina">Homepage</a></p>
+        <p>Learn more about me on <a href="/about-cherina">About Me</a></p>
     </body>
     </html>
     """
@@ -121,7 +149,178 @@ def user_profile(username):
     return f"""
     <h1>User Profile: {username}</h1>
     <p>This is the profile page for {username}.</p>
-    <p>Go back to the <a href="/">homepage</a>.</p>
+    <p>Go back to the <a href="/cherina">homepage</a>.</p>
+    """
+
+
+@app.route('/rana')
+def rana():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About me</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>About me</h1>
+        <p>Hello, I'm Rana. I am passionate about fashion particularly shoes!</p>
+        <p>Here are a few things other things I enjoy:</p>
+        <ul>
+            <li>Buying shoes</li>
+            <li>Writing code</li>
+            <li>Painting & Drawing</li>
+            <li>Anime</li>
+        </ul>
+        <p>Visit my <a href="/Shoes-page">Shoes Page</a>.</p>
+        <p>Explore my <a href="/anime">Favourite Anime</a>.</p>
+        <p>Back to Group Homepage <a href="/">Group Homepage</a>.</p>
+    </body>
+    </html>
+    """
+
+
+@app.route('/Shoes-page')
+def shoes():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shoes!</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Shoe's</h1>
+        <p>This is the Shoe wall of Shame!</p>
+        <p>And yes there are  more loose shoes in that bag</p>
+        <img src="/static/Shoes.png" alt="Shoes.png" width="300" height="200">
+        <p>Explore my <a href="/anime">Favourite Anime</a>.</p>
+        <p>Return to my Homepage <a href="/rana">Homepage</a>.</p>
+    </body>
+    </html>
+    """
+
+
+@app.route('/anime')
+def anime():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anime</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>My Favourite Anime</h1>
+        <p>These are my top rated Anime series!</p>
+         <a href='/demon-slayer'>
+        <img src="/static/Demon Slayer.png" alt="Demon Slayer" width="300" height="200">
+        </a>
+        <a href='/death-note'>
+        <img src="/static/Death Note.png" alt="Death Note" width="300" height="200">
+        </a>
+        <a href='/attack-on-titan'>
+        <img src="/static/Attack on Titan.png" alt="Attack on Titan" width="300" height="200">
+        </a>
+        <p>Return to my Homepage <a href="/rana">Homepage</a>.</p>
+    </body>
+    </html>
+    """
+
+
+@app.route('/demon-slayer')
+def demon_slayer():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Demon Slayer</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Demon Slayer</h1>
+        <p>This is Demon Slayer</p>
+        <p>A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, 
+            who is turning into a demon slowly. Tanjiro sets out to become a demon slayer to avenge his family 
+            and cure his sister</p>
+        <a href='https://www.imdb.com/title/tt9335498/'>
+        <img src="/static/Demon Slayer.png" alt="Demon Slayer" width="300" height="200">
+        </a>
+        <br>
+        <span>Page 1</span>
+        <a href='/death-note'>Next</a>
+        <p>Return to Anime Page <a href="/anime">Anime</a>.</p>    
+    </body>
+    </html>
+    """
+
+
+@app.route('/death-note')
+def death_note():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Death note</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Death Note</h1>
+        <p>This is Death note</p>
+        <p>Light is an extremely brilliant but bored school student. Until the strange day where he accidentally 
+        encounters the Death Note; a mysterious notebook with the power to kill anyone whose name is written 
+        inside it.</p>
+        <a href='https://www.imdb.com/title/tt0877057/?ref_=fn_al_tt_1'>
+        <img src="/static/Death Note.png" alt="Death Note" width="300" height="200">
+        </a>
+        <br>
+        <span>Page 2</span>
+        <a href='/demon-slayer'>Previous</a>
+        <a href='/attack-on-titan'>Next</a>
+        <p>Return to Anime Page <a href="/anime">Anime</a>.</p>
+        
+    </body>
+    </html>
+    """
+
+
+@app.route('/attack-on-titan')
+def attack_on_titan():
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Death note</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>Attack on Titan</h1>
+        <p>This is Attack on Titan</p>
+        <p>It is set in a world where humanity is forced to live in cities surrounded by three enormous walls that 
+        protect them from gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, 
+        who vows to exterminate the Titans after they bring about the destruction of his hometown and the death 
+        of his family and friends </p>
+        <a href='https://www.imdb.com/title/tt2560140/?ref_=fn_al_tt_4'>
+        <img src="/static/Attack on Titan.png" alt="Attack on Titan" width="300" height="200">
+        </a>
+        <br>
+        <span>Page 3</span>
+        <a href='/death-note'>Previous</a>
+        <p>Return to Anime Page <a href="/anime">Anime</a>.</p>
+    </body>
+    </html>
     """
 
 
