@@ -6,7 +6,7 @@
 # Pre-read next week's notes
 # Create a few extra html routes and include <a> tags to other HTML route functions
 
-from flask import Flask
+from flask import Flask, url_for
 
 # Importing Flask: The code starts by importing the Flask module, which is necessary to create a Flask application.
 # Creating the Flask App: An instance of the Flask class is created with the name app.
@@ -30,7 +30,7 @@ def index():
         <a href='/rana'>
         <img src="/static/Rana.png" alt="Rana" width="300" height="200">
         </a>
-        <a>
+        <a href='/katyhome'>
         <img src="/static/Katy.png" alt="Katy" width="300" height="200">
         </a>
         <a href='/cherina'>
@@ -320,6 +320,324 @@ def attack_on_titan():
         <a href='/death-note'>Previous</a>
         <p>Return to Anime Page <a href="/anime">Anime</a>.</p>
     </body>
+    </html>
+    """
+# TODO ADD IN KATY FLASK PRACTICE
+
+
+@app.route('/katyhome')
+def katy_home():
+    group_home_url = url_for('index')
+    about_url = url_for('about_me_flask')
+    contact_url = url_for('contact_flask')
+    blog_url = url_for('blog')
+    eras_url = url_for('eras_flask')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+       <head>
+           <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Home Page</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Katy's Home Page</h1>
+            <p>Welcome to my website!</p>
+            <p>Have fun!</p>
+            <img src='/static/hellokitty.jpeg' alt='Hello Kitty with her lunchbox'>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{contact_url}">Contact Us Page</a>
+            <a class='button' href="{blog_url}">Blog Page</a>
+            <a class='button' href="{eras_url}">Era's Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/blog')
+def blog():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    contact_url = url_for('contact_flask')
+    blog_one_url = url_for('blog_name', name='one')
+    blog_two_url = url_for('blog_name', name='two')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Blog Page</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Blog</h1>
+            <p>Welcome to my blog!</p>
+            <p>Have fun!</p>
+            <ol>
+                <li><a href="{blog_one_url}">Week 1</a></li>
+                <li><a href="{blog_two_url}">Week 2</a></li>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{contact_url}">Contact Us Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/blog/<name>')
+def blog_name(name):
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    contact_url = url_for('contact_flask')
+    blog_one_url = url_for('blog_name', name='one')
+    blog_two_url = url_for('blog_name', name='two')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Blog Page</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Blog</h1>
+            <p>Welcome to my week {name} blog!</p>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{contact_url}">Contact Us Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/about')
+def about_me_flask():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    contact_url = url_for('contact_flask')
+    blog_url = url_for('blog')
+    about_k_url = url_for('about_me', name='Katy')
+    about_r_url = url_for('about_me', name='Rana')
+    about_c_url = url_for('about_me', name='Cherina')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>About</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>About</h1>
+            <p>Find out stuff about us.</p>
+            <ol>
+            <li><a href="{about_k_url}">Katy</a></li>
+             <li><a href="{about_r_url}">Rana</a></li>
+             <li><a href="{about_c_url}">Cherina</a></li>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{contact_url}">Contact Us Page</a>
+            <a class='button' href="{blog_url}">Blog</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/about/<name>')
+def about_me(name):
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    contact_url = url_for('contact_flask')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+        <head>
+             <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>About us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>All about us!</h1>
+            <p>Team member: {name}</p>
+            <p>I work on the team!</p>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{contact_url}">Contact Us Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/contact')
+def contact_flask():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Contact Us</h1>
+            <p>Any questions, please contact us.</p>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/eras')
+def eras_flask():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    era_one_url = url_for('era_one')
+    era_three_url = url_for('era_three')
+    era_two_url = url_for('era_two')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>What is your favourite era?</h1>
+            <a href="{era_one_url}"><img src='/static/1989.jpeg' alt='Taylor's version 1989 album cover'></a>
+            <a href="{era_two_url}"><img src='/static/taylorrep.jpeg' alt='Taylor's reputation album cover'></a>
+            <a href="{era_three_url}"><img src='/static/folklore.jpeg' alt='Taylor's folklore album cover'></a>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/eras/1989')
+def era_one():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    eras_url = url_for('eras_flask')
+    era_two_url = url_for('era_two')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>1989?</h1>
+            <img src='/static/1989.jpeg' alt='Taylor's version 1989 album cover'>
+            <hr>
+            <a href="{era_two_url}">Reputation >></a>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{eras_url}">Era's Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/eras/reputation')
+def era_two():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    eras_url = url_for('eras_flask')
+    era_one_url = url_for('era_one')
+    era_three_url = url_for('era_three')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Reputation?</h1>
+            <img src='/static/taylorrep.jpeg' alt='Taylor's reputation album cover'>
+            <hr>
+            <a href="{era_one_url}"> << 1989 ||</a>
+            <a href="{era_three_url}">Folklore >></a>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{eras_url}">Era's Page</a>
+        </body>
+    </html>
+    """
+
+
+@app.route('/eras/folklore')
+def era_three():
+    group_home_url = url_for('index')
+    home_url = url_for('katy_home')
+    about_url = url_for('about_me_flask')
+    eras_url = url_for('eras_flask')
+    era_two_url = url_for('era_two')
+    return f""" 
+    <!doctype>
+    <html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact us</title>
+            <link rel="stylesheet" href="/static/style.css">
+        </head>
+        <body>
+            <h1>Folklore?</h1>
+            <img src='/static/folklore.jpeg' alt='Taylor's folklore album cover'>
+            <hr>
+            <a href="{era_two_url}"> << Reputation</a>
+            <hr>
+            <a class='button' href="{group_home_url}">Group Home Page</a>
+            <a class='button' href="{home_url}">Katy's Home Page</a>
+            <a class='button' href="{about_url}">About Us Page</a>
+            <a class='button' href="{eras_url}">Era's Page</a>
+        </body>
     </html>
     """
 
